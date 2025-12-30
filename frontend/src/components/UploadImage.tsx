@@ -95,12 +95,10 @@ export default function UploadImage() {
   });
 
   // optional preview only (small subset)
-  const [previewResults, setPreviewResults] = useState<UploadResult[]>([]);
 
   async function uploadInBatches(files: File[], batchSize = 20) {
     setUploading(true);
     setError(null);
-    setPreviewResults([]);
     setProgress({
       uploaded: 0,
       total: files.length,
@@ -125,10 +123,7 @@ export default function UploadImage() {
           }
 
           // keep only a small preview
-          setPreviewResults((prev) => {
-            if (prev.length >= PREVIEW_LIMIT) return prev;
-            return [...prev, ...response.results].slice(0, PREVIEW_LIMIT);
-          });
+          
         }
 
         uploadedCount += batch.length;
@@ -187,32 +182,7 @@ export default function UploadImage() {
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      {previewResults.length > 0 && (
-        <div className="results">
-          <h3>
-            Preview (first {PREVIEW_LIMIT} images)
-          </h3>
-
-          <div className="image-grid">
-            {previewResults.map((res) => (
-              <div key={res.image_id} className="image-card">
-                <img
-                  src={`http://localhost:9000${res.image_url}`}
-                  alt={res.filename}
-                />
-                <div className="meta">
-                  <p><strong>{res.filename}</strong></p>
-                  <p>Faces: {res.faces_detected}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <p style={{ marginTop: 8, fontSize: 12 }}>
-            Showing preview only. Full dataset indexed in backend.
-          </p>
-        </div>
-      )}
+      
     </div>
   );
 }

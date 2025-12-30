@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { recognizeImage } from "../services/api";
 import type { Match } from "../types";
 
-const API_BASE = "http://localhost:9000";
-
+// const API_BASE = "http://localhost:9000";
+const API_BASE = "https://api-test.rysen.app";
 export default function CameraTest() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);

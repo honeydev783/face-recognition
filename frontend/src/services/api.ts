@@ -24,8 +24,8 @@
 //   return res.json();
 // }
 
-const API_BASE = "http://localhost:9000/api";
-
+// const API_BASE = "http://localhost:9000/api";
+const API_BASE = "https://api-test.rysen.app/api";
 export async function uploadImages(files: File[]) {
   const form = new FormData();
   files.forEach((file) => form.append("files", file));
