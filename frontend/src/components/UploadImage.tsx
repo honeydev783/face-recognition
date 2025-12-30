@@ -71,16 +71,6 @@
 import { useState } from "react";
 import { uploadImages } from "../services/api";
 
-interface UploadResult {
-  filename: string;
-  image_id: string;
-  faces_detected: number;
-  faces_indexed: number;
-  image_url: string;
-}
-
-const PREVIEW_LIMIT = 20;
-
 export default function UploadImage() {
   const [files, setFiles] = useState<File[]>([]);
   const [uploading, setUploading] = useState(false);
