@@ -1,13 +1,43 @@
+// const API_BASE = "http://localhost:9000/api";
+
+// export async function uploadImage(file: File) {
+//   const form = new FormData();
+//   form.append("file", file);
+
+//   const res = await fetch(`${API_BASE}/upload`, {
+//     method: "POST",
+//     body: form,
+//   });
+
+//   return res.json();
+// }
+
+// export async function recognizeImage(blob: Blob) {
+//   const form = new FormData();
+//   form.append("file", blob, "capture.jpg");
+
+//   const res = await fetch(`${API_BASE}/recognize`, {
+//     method: "POST",
+//     body: form,
+//   });
+
+//   return res.json();
+// }
+
 const API_BASE = "http://localhost:9000/api";
 
-export async function uploadImage(file: File) {
+export async function uploadImages(files: File[]) {
   const form = new FormData();
-  form.append("file", file);
+  files.forEach((file) => form.append("files", file));
 
   const res = await fetch(`${API_BASE}/upload`, {
     method: "POST",
     body: form,
   });
+
+  if (!res.ok) {
+    throw new Error("Upload failed");
+  }
 
   return res.json();
 }
